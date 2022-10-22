@@ -29,7 +29,7 @@
                 <fieldset>
                     <legend style="margin-top: 25px">Kémiai elemek kereső <i>(Aplha version)</i></legend>
                     <hr>
-                    <legend style="margin-top: 25px">Légyszíves <strong>írj be egy vegyjelet</strong> <i>a keresőbe</i> <strong>ezutén nyomja meg </strong>"Keres" gombot!</legend>
+                    <legend style="margin-top: 25px">Légyszíves <strong>írj be egy vegyjelet</strong> <i>a keresőbe</i> <strong>ezután nyomja meg </strong>"Keres" gombot!</legend>
                     <hr>
                     <legend style="margin-top: 25px">PL: Au</legend>
                     <br>
@@ -40,14 +40,13 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="col-form-label col-form-label-lg mt-4"
-                                for="inputLarge"><strong>Kereső</strong></label>
+                                for="inputLarge"><strong>Keresés: írja be a vegyjelet!</strong></label>
                                 <input class="form-control form-control-lg" type="text"
-                                placeholder="írjon ide..." id="bekeres" spellcheck="false"
+                                placeholder="írja be a vegyjelet..." id="bekeres" spellcheck="false"
                                 data-ms-editors="true">
                             </div>
                         </div>
     
-            
                     </div>
                     <hr>
                     <div class="row">
@@ -61,10 +60,63 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="alert alert-dismissible alert-primary">
-                                <strong>Találatok: </strong>
+                                <strong>Neve: </strong>
                                 <a href="#" id="kimenet" class="alert-link"></a>
                             </div>
-                    
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="alert alert-dismissible alert-primary">
+                                <strong>Rendszám:</strong>
+                                <a href="#" id="kimenet2" class="alert-link"></a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="alert alert-dismissible alert-primary">
+                                    <strong>Vegyjele: </strong>
+                                    <a href="#" id="kimenet3" class="alert-link"></a>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="alert alert-dismissible alert-primary">
+                                    <strong>Relatív atomtömeg: </strong>
+                                    <a href="#" id="kimenet4" class="alert-link"></a>
+                                </div>
+                            </div>
+    
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="alert alert-dismissible alert-primary">
+                                        <strong>Elektronegativitás: </strong>
+                                        <a href="#" id="kimenet5" class="alert-link"></a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="alert alert-dismissible alert-primary">
+                                        <strong>Elektron szerkezet: </strong>
+                                        <a href="#" id="kimenet6" class="alert-link"></a>
+                                    </div>
+                                </div>
+
+                                <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="alert alert-dismissible alert-primary">
+                                        <strong>Felfedező: </strong>
+                                        <a href="#" id="kimenet7" class="alert-link"></a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="alert alert-dismissible alert-primary">
+                                        <strong>Felfedezés éve: </strong>
+                                        <a href="#" id="kimenet8" class="alert-link"></a>
+                                    </div>
+                                </div>
+    
+    
+    
     
     
     
@@ -96,11 +148,11 @@
         
         # csv / txt fálj megnyitása (githubon belül egy txt/csv fáljnál rákatintuk a RAW ra)
         
-        url_content = open_url("https://raw.githubusercontent.com/leskoarpi/infojegyzet_fifa_pandas_oop/master/fifa.txt")
+        url_content = open_url("https://raw.githubusercontent.com/loczylevi/okj-kemiai_elemek_felfedezese/main/felfedezesek.txt")
 
         #változok megadása
         bekeres = Element("bekeres"); message = Element("msg");
-        kimenet = Element("kimenet"); 
+        kimenet = Element("kimenet"); kimenet2 = Element("kimenet2"); kimenet3 = Element("kimenet3"); kimenet4 = Element("kimenet4"); kimenet5 = Element("kimenet5"); kimenet6 = Element("kimenet6"); kimenet7 = Element("kimenet7"); kimenet8 = Element("kimenet8"); 
         
         
         df = pd.read_csv(url_content, encoding='latin2',sep=';')
@@ -109,11 +161,23 @@
 
         def solve(*args, **kwargs): 
             vegyjel = str(bekeres.value)
+            vegyjel = vegyjel.lower()
+            vegyjel = vegyjel.capitalize()
             for i in df.index:
-                if df["Csapat"][i] == vegyjel:
-                    eredmeny = df["Pontszam"][i]
+                if df["Vegyjel"][i] == vegyjel:
+                    eredmeny = df["Elem"][i]
+                    eredmeny2 = df["Rendszám"][i]
+                    eredmeny3 = df["Vegyjel"][i]
+                    eredmeny4 = df["Év"][i]
+                    eredmeny5 = df["Felfedező"][i]
+
+                    
               
-            kimenet.write(f"Keresés eredménye: {eredmeny}")
+            kimenet.write(eredmeny)
+            kimenet2.write(eredmeny2)
+            kimenet3.write(eredmeny3)
+            kimenet7.write(eredmeny5)
+            kimenet8.write(eredmeny4)
             
             message.write("Feldolgozás kész! ( ͡° ͜ʖ ͡°)")
             
