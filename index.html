@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stilus2.css">
         <link rel="stylesheet" href="stilus.css">
         <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
@@ -29,13 +30,12 @@
                 <fieldset>
                     <legend style="margin-top: 25px">Kémiai elem kereső <i>(Aplha version)</i></legend>
                     <hr>
-                    <legend style="margin-top: 25px">Légyszíves <strong>írj be egy vegyjelet</strong> <i>a keresőbe</i> <strong>ezután nyomja meg </strong>"Keres" gombot!</legend>
+                    <legend style="margin-top: 25px">Légyszíves <strong>írj be egy vegyjelet</strong> <i>a keresőbe</i> <strong>ezután nyomd meg </strong>"Keres" gombot!</legend>
                     <hr>
                     <legend style="margin-top: 25px">PL: Au</legend>
                     <br>
                     <br>
-                    <br>
-                    <br>
+            
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -135,6 +135,10 @@
         </fieldset>
     </form>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     </body>
 
     <p id="df"></p>
@@ -154,7 +158,7 @@
         bekeres = Element("bekeres"); message = Element("msg");
         kimenet = Element("kimenet"); kimenet2 = Element("kimenet2"); kimenet3 = Element("kimenet3"); kimenet4 = Element("kimenet4"); kimenet5 = Element("kimenet5"); kimenet6 = Element("kimenet6"); kimenet7 = Element("kimenet7"); kimenet8 = Element("kimenet8"); 
         
-        
+        jo = False
         df = pd.read_csv(url_content, encoding='latin2',sep=';')
         
         # Év;Elem;Vegyjel;Rendszám;Felfedező
@@ -171,6 +175,16 @@
                     eredmeny4 = df["Év"][i]
                     eredmeny5 = df["Felfedező"][i]
                     eredmeny6 = df["Atomtomeg"][i]
+                    jo = True
+                elif df["Vegyjel"][i] != vegyjel:
+                    if vegyjel.isalpha():
+                        message.write("HIBA: Ismeretlen vegyjel")
+                    if vegyjel == "":
+                        message.write("A semmit nem tudom meg keresni!")
+                    else:
+                        message.write(f"A vegyjelekbe mióta vannak számok? {vegyjel}!?\nBetüket kértem nem számokat!")
+                    
+
 
                     
               
@@ -180,8 +194,10 @@
             kimenet7.write(eredmeny5)
             kimenet8.write(eredmeny4)
             kimenet4.write(eredmeny6)
-            
-            message.write("Feldolgozás kész! ( ͡° ͜ʖ ͡°)")
+            if jo:
+                message.write("Feldolgozás kész! ( ͡° ͜ʖ ͡°)")
+    
+
             
             
         
