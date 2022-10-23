@@ -16,7 +16,7 @@
 
 <body>
     <title>
-        Kémiai Elemek
+        CSV fálj beolvasás
         </title>
     
 
@@ -27,7 +27,7 @@
         <div class="container">
             <form>
                 <fieldset>
-                    <legend style="margin-top: 25px">Kémiai elem kereső <i>(Aplha version)</i></legend>
+                    <legend style="margin-top: 25px">Kémiai elemek kereső <i>(Aplha version)</i></legend>
                     <hr>
                     <legend style="margin-top: 25px">Légyszíves <strong>írj be egy vegyjelet</strong> <i>a keresőbe</i> <strong>ezután nyomja meg </strong>"Keres" gombot!</legend>
                     <hr>
@@ -148,7 +148,7 @@
         
         # csv / txt fálj megnyitása (githubon belül egy txt/csv fáljnál rákatintuk a RAW ra)
         
-        url_content = open_url("https://raw.githubusercontent.com/loczylevi/okj-kemiai_elemek_felfedezese/main/felfedezesek.txt")
+        url_content = open_url("https://raw.githubusercontent.com/loczylevi/okj-kemiai_elemek_felfedezese/main/elemek.txt")
 
         #változok megadása
         bekeres = Element("bekeres"); message = Element("msg");
@@ -170,6 +170,7 @@
                     eredmeny3 = df["Vegyjel"][i]
                     eredmeny4 = df["Év"][i]
                     eredmeny5 = df["Felfedező"][i]
+                    eredmeny6 = df["Atomtomeg"][i]
 
                     
               
@@ -178,6 +179,7 @@
             kimenet3.write(eredmeny3)
             kimenet7.write(eredmeny5)
             kimenet8.write(eredmeny4)
+            kimenet4.write(eredmeny6)
             
             message.write("Feldolgozás kész! ( ͡° ͜ʖ ͡°)")
             
