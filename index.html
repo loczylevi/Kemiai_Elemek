@@ -179,9 +179,9 @@
                 elif df["Vegyjel"][i] != vegyjel:
                     if vegyjel.isalpha():
                         message.write("HIBA: Ismeretlen vegyjel")
-                    if vegyjel == "":
+                    elif vegyjel == "":
                         message.write("A semmit nem tudom meg keresni!")
-                    else:
+                    elif vegyjel.isalpha() == False:
                         message.write(f"A vegyjelekbe mióta vannak számok? {vegyjel}!?\nBetüket kértem nem számokat!")
                     
 
