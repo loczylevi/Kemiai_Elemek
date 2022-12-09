@@ -86,20 +86,19 @@
                             </div>
     
                             <hr>
-                            <div class="row">
                                 <div class="col-sm-4">
                                     <div class="alert alert-dismissible alert-primary">
-                                        <strong>Elektronegativitás: </strong>
-                                        <a href="#" id="kimenet5" class="alert-link"></a>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="alert alert-dismissible alert-primary">
-                                        <strong>Elektron szerkezet: </strong>
+                                        <strong>Elektronnegativitás: </strong>
                                         <a href="#" id="kimenet6" class="alert-link"></a>
                                     </div>
                                 </div>
-
+                                
+                                <div class="col-sm-4">
+                                    <div class="alert alert-dismissible alert-primary">
+                                        <strong>Felfedezés éve: </strong>
+                                        <a href="#" id="kimenet8" class="alert-link"></a>
+                                    </div>
+                                </div>
                                 <hr>
                             <div class="row">
                                 <div class="col-sm-4">
@@ -108,12 +107,7 @@
                                         <a href="#" id="kimenet7" class="alert-link"></a>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="alert alert-dismissible alert-primary">
-                                        <strong>Felfedezés éve: </strong>
-                                        <a href="#" id="kimenet8" class="alert-link"></a>
-                                    </div>
-                                </div>
+                               
     
                     </div>
                 <hr>
@@ -147,7 +141,7 @@
         
         # csv / txt fálj megnyitása (githubon belül egy txt/csv fáljnál rákatintuk a RAW ra)
         
-        url_content = open_url("https://raw.githubusercontent.com/loczylevi/okj-kemiai_elemek_felfedezese/main/elemek.txt")
+        url_content = open_url("https://raw.githubusercontent.com/loczylevi/Kemiai_Elemek/main/tablazat.txt")
 
         #változok megadása
         bekeres = Element("bekeres"); message = Element("msg");
@@ -170,6 +164,7 @@
                     eredmeny4 = df["Év"][i]
                     eredmeny5 = df["Felfedező"][i]
                     eredmeny6 = df["Atomtomeg"][i]
+                    eredmeny7 = df["Negativitas"][i]
                     jo = True
                 elif df["Vegyjel"][i] != vegyjel:
                     if vegyjel.isalpha():
@@ -185,6 +180,7 @@
             kimenet7.write(eredmeny5)
             kimenet8.write(eredmeny4)
             kimenet4.write(eredmeny6)
+            kimenet6.write(eredmeny7)
             if jo:
                 message.write("Feldolgozás kész! ( ͡° ͜ʖ ͡°)")
         
